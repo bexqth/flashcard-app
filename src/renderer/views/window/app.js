@@ -1,4 +1,3 @@
-const { createElement } = require("react");
 
 async function showView(viewName) {
     await loadHTMLFile(`../${viewName}/index.html`);

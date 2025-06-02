@@ -7,7 +7,6 @@
 </head>
 <body>
     <div class="dashboard-container p-4">
-    <!-- Header Section -->
     <div class="dashboard-header mb-4">
         <div class="row align-items-center">
             <div class="col">
@@ -15,7 +14,7 @@
                 <p class="dashboard-subtitle text-muted">Choose a deck to start studying</p>
             </div>
             <div class="col-auto">
-                <button class="btn btn-create-deck" onclick="app.loadView('create')">
+                <button class="btn btn-create-deck">
                     <i class="plus-icon">+</i>
                     New Deck
                 </button>
@@ -23,7 +22,6 @@
         </div>
     </div>
 
-    <!-- Stats Cards -->
     <div class="row mb-4">
         <div class="col-md-3 col-6 mb-3">
             <div class="stat-card">
@@ -51,11 +49,9 @@
         </div>
     </div>
 
-    <!-- Decks Grid -->
     <div class="decks-section">
         <h3 class="section-title mb-3">Your Decks</h3>
         <div class="row" id="decks-grid">
-            <!-- Deck cards will be loaded here -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="deck-card">
                     <div class="deck-header">

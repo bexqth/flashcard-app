@@ -1,4 +1,4 @@
-/* Dashboard Styles */
+
 .dashboard-container {
     background-color: #faf5f3;
     min-height: 100vh;
@@ -24,20 +24,20 @@
 }
 
 .btn-create-deck {
-    background-color: #f1948a;
     border: none;
-    color: white;
+    background-color: #e2c6b8 !important;
     padding: 12px 24px;
     border-radius: 12px;
     font-weight: 600;
     transition: all 0.3s ease;
+    color: white !important;
 }
 
 .btn-create-deck:hover {
-    background-color: #e67e68;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(241, 148, 138, 0.3);
-    color: white;
+    background-color: #ca967f;
+    color: #ca967f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .plus-icon {
@@ -46,7 +46,6 @@
     font-weight: bold;
 }
 
-/* Stats Cards */
 .stat-card {
     background: white;
     padding: 1.5rem;
@@ -76,7 +75,6 @@
     font-size: 0.9rem;
 }
 
-/* Decks Section */
 .section-title {
     color: #3e2723;
     font-weight: 600;
@@ -97,6 +95,7 @@
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border-color: rgba(241, 148, 138, 0.2);
+    cursor: pointer;
 }
 
 .deck-header {
@@ -175,8 +174,6 @@
 }
 
 
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .dashboard-header {
         padding: 1.5rem;
