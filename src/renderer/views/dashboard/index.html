@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudyCards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container p-4">
+    <!-- Header Section -->
+    <div class="dashboard-header mb-4">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="dashboard-title">My Decks</h1>
+                <p class="dashboard-subtitle text-muted">Choose a deck to start studying</p>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-create-deck" onclick="app.loadView('create')">
+                    <i class="plus-icon">+</i>
+                    New Deck
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">127</div>
+                <div class="stat-label">Cards Studied Today</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Day Streak</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Total Decks</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 mb-3">
+            <div class="stat-card">
+                <div class="stat-number">78%</div>
+                <div class="stat-label">Average Score</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Decks Grid -->
+    <div class="decks-section">
+        <h3 class="section-title mb-3">Your Decks</h3>
+        <div class="row" id="decks-grid">
+            <!-- Deck cards will be loaded here -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="deck-card">
+                    <div class="deck-header">
+                        <div class="deck-icon">
+                            <span>JS</span>
+                        </div>
+                        <div class="deck-info">
+                            <h5 class="deck-title">JavaScript Fundamentals</h5>
+                            <p class="deck-meta">45 cards • Created 2 days ago</p>
+                        </div>
+                    </div>
+                    <div class="deck-progress">
+                        <div class="progress-info">
+                            <span class="progress-text">Progress</span>
+                            <span class="progress-percent">78%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="deck-card">
+                    <div class="deck-header">
+                        <div class="deck-icon" style="background: linear-gradient(135deg, #f1948a, #e67e68);">
+                            <span>ES</span>
+                        </div>
+                        <div class="deck-info">
+                            <h5 class="deck-title">Spanish Vocabulary</h5>
+                            <p class="deck-meta">32 cards • Created 1 week ago</p>
+                        </div>
+                    </div>
+                    <div class="deck-progress">
+                        <div class="progress-info">
+                            <span class="progress-text">Progress</span>
+                            <span class="progress-percent">45%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="deck-card">
+                    <div class="deck-header">
+                        <div class="deck-icon" style="background: linear-gradient(135deg, #a8e6cf, #7fcdcd);">
+                            <span>HI</span>
+                        </div>
+                        <div class="deck-info">
+                            <h5 class="deck-title">History Facts</h5>
+                            <p class="deck-meta">28 cards • Created 3 days ago</p>
+                        </div>
+                    </div>
+                    <div class="deck-progress">
+                        <div class="progress-info">
+                            <span class="progress-text">Progress</span>
+                            <span class="progress-percent">92%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
