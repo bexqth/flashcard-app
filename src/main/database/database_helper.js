@@ -22,13 +22,13 @@ class DatabaseHelper {
 
     createTables() {
         this.db.serialize(() => {
-            this.db.run(`
-                CREATE TABLE IF NOT EXISTS decks (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-                )
-            `);
+            this.db.run(`CREATE TABLE IF NOT EXISTS decks (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name TEXT NOT NULL,
+                        icon_id INTEGER DEFAULT 1,
+                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                        FOREIGN KEY (icon_id) REFERENCES icons (id)
+                    )`);
 
             this.db.run(`
                 CREATE TABLE IF NOT EXISTS cards (
@@ -39,7 +39,30 @@ class DatabaseHelper {
                     FOREIGN KEY (deck_id) REFERENCES decks (id)
                 )
             `);
+
+            this.db.run(`CREATE TABLE IF NOT EXISTS icons (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                bootstrap_class TEXT NOT NULL
+            )`);
+
         });
+        this.insertIcons();
+    }
+
+    insertIcons() {
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Chemistry', 'flask')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Math', 'calculator')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Book', 'book')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Pencil', 'pencil')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Graduation', 'mortarboard')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Biology', 'tree')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Physics', 'lightning')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Geography', 'globe')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('History', 'clock-history')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Language', 'translate')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Psychology', 'brain')");
+        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Engineering', 'gear')");
     }
 
     getDatabase() {
