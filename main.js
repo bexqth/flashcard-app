@@ -10,6 +10,7 @@ require('electron-reload')([
   ignored: /main\.js/,
 });
 
+const databaseHelper = require('./src/main/database/database_helper');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -24,3 +25,7 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
+
+app.on('before-quit', () => {
+    databaseHelper.close();
+});
