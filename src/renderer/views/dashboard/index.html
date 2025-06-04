@@ -15,7 +15,7 @@
                 <p class="dashboard-subtitle text-muted">Choose a deck to start studying</p>
             </div>
             <div class="col-auto">
-                <button class="btn btn-create-deck" onclick="handleNewDeckClick()">
+                <button class="btn btn-create-deck" onclick="openModal()">
                     <span class="plus-icon">+</span>
                     New Deck
                 </button>
@@ -124,6 +124,64 @@
         </div>
     </div>
 </div>
+
+
+<div id="myModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h4>Create new deck</h4>
+        <label for="deck-name">Deck name</label>
+        <input type="text" id="deck-name" name="deck-name" class="deck-name" placeholder="Enter deck name...">
+        
+        <div class="row">
+            <!-- Left Column - Icons -->
+            <div class="col-6">
+                <label>Choose Icon</label>
+                <div class="icons-grid">
+                    <div class="icon-item selected" onclick="selectIcon(this, 'book')">
+                        <i class="bi bi-book"></i>
+                    </div>
+                    <div class="icon-item" onclick="selectIcon(this, 'calculator')">
+                        <i class="bi bi-calculator"></i>
+                    </div>
+                    <div class="icon-item" onclick="selectIcon(this, 'flask')">
+                        <i class="bi bi-flask"></i>
+                    </div>
+                    <div class="icon-item" onclick="selectIcon(this, 'globe')">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <div class="icon-item" onclick="selectIcon(this, 'translate')">
+                        <i class="bi bi-translate"></i>
+                    </div>
+                    <div class="icon-item" onclick="selectIcon(this, 'palette')">
+                        <i class="bi bi-palette"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Colors -->
+            <div class="col-6">
+                <label>Choose Color</label>
+                <div class="colors-grid">
+                    <div class="color-item selected" onclick="selectColor(this, '#f1948a')" style="background-color: #f1948a;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#a78bfa')" style="background-color: #a78bfa;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#34d399')" style="background-color: #34d399;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#60a5fa')" style="background-color: #60a5fa;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#f59e0b')" style="background-color: #f59e0b;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#ef4444')" style="background-color: #ef4444;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#8b5cf6')" style="background-color: #8b5cf6;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#06b6d4')" style="background-color: #06b6d4;"></div>
+                    <div class="color-item" onclick="selectColor(this, '#84cc16')" style="background-color: #84cc16;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+            <button type="button" class="btn btn-create" onclick="createDeck()">Create Deck</button>
+        </div>
+    </div>
+</div>
+
 
 <script src="app.js"></script>
 
