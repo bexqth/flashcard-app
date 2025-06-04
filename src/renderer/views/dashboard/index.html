@@ -3,6 +3,7 @@
 <head>
     <title>StudyCards</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,8 +15,8 @@
                 <p class="dashboard-subtitle text-muted">Choose a deck to start studying</p>
             </div>
             <div class="col-auto">
-                <button class="btn btn-create-deck">
-                    <i class="plus-icon">+</i>
+                <button class="btn btn-create-deck" onclick="handleNewDeckClick()">
+                    <span class="plus-icon">+</span>
                     New Deck
                 </button>
             </div>
@@ -123,5 +124,8 @@
         </div>
     </div>
 </div>
+
+<script src="app.js"></script>
+
 </body>
 </html>
