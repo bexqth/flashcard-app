@@ -12,6 +12,7 @@ require('electron-reload')([
 
 const databaseHelper = require('./src/main/database/database_helper');
 const IconService = require('./src/main/services/icon_service');
+const ColorService = require('./src/main/services/color_service');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -29,6 +30,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   new IconService(databaseHelper);
+  new ColorService(databaseHelper);
   createWindow();
 });
 

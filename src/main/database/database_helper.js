@@ -43,8 +43,15 @@ class DatabaseHelper {
                 back TEXT NOT NULL,
                 FOREIGN KEY (deck_id) REFERENCES decks (id)
             )`, () => {
-                this.checkAndInsertIcons(); // Only call after all tables exist
+                this.checkAndInsertIcons();
+                this.checkAndInsertColors();
             });
+
+            this.db.run(`CREATE TABLE IF NOT EXISTS deck_colors (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                hex_value TEXT UNIQUE NOT NULL
+            )`);
         });
     }
 
@@ -85,6 +92,43 @@ class DatabaseHelper {
         });
         stmt.finalize(() => {
             console.log('Initial icons inserted.');
+        });
+    }
+
+    checkAndInsertColors() {
+        this.db.get("SELECT COUNT(*) as count FROM deck_colors", (err, row) => {
+            if (err) {
+                console.error('Failed to check deck_colors table:', err);
+                return;
+            }
+
+            if (row.count === 0) {
+                this.insertColors();
+            } else {
+                console.log('Deck colors already inserted — skipping insert.');
+            }
+        });
+    }
+
+    insertColors() {
+        const colors = [
+            ['Light Red', '#f1948a'],
+            ['Purple', '#a78bfa'],
+            ['Green', '#34d399'],
+            ['Blue', '#60a5fa'],
+            ['Orange', '#f59e0b'],
+            ['Red', '#ef4444'],
+            ['Dark Purple', '#8b5cf6'],
+            ['Cyan', '#06b6d4'],
+            ['Lime', '#84cc16'],
+        ];
+
+        const stmt = this.db.prepare("INSERT OR IGNORE INTO deck_colors (name, hex_value) VALUES (?, ?)");
+        colors.forEach(([name, hex]) => {
+            stmt.run(name, hex);
+        });
+        stmt.finalize(() => {
+            console.log('Initial deck colors inserted.');
         });
     }
 

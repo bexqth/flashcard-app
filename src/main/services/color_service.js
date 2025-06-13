@@ -1,18 +1,18 @@
 const { ipcMain } = require('electron');
 
-class IconService {
+class ColorService {
     constructor(database) {
         this.db = database.getDatabase();
         this.registerHandlers();
     }
 
     registerHandlers() {
-        ipcMain.handle('icon:getAll', () => this.getAllIcons()); //result is promise thats why its handle
+        ipcMain.handle('color:getAll', () => this.getAllColors()); //result is promise thats why its handle
     }
 
-    getAllIcons() {
+    getAllColors() {
         return new Promise((resolve, reject) => {
-            this.db.all('SELECT * FROM icons', (err, rows) => {
+            this.db.all('SELECT * FROM deck_colors', (err, rows) => {
             if (err) reject(err);
             else resolve(rows);
             });
@@ -21,4 +21,4 @@ class IconService {
 
 }
 
-module.exports = IconService;
+module.exports = ColorService;
