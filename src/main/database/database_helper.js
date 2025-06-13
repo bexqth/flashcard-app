@@ -65,7 +65,7 @@ class DatabaseHelper {
 
     insertIcons() {
         const icons = [
-            ['Chemistry', 'flask'],
+            ['Chemistry', 'beaker'],
             ['Math', 'calculator'],
             ['Book', 'book'],
             ['Pencil', 'pencil'],
@@ -75,7 +75,7 @@ class DatabaseHelper {
             ['Geography', 'globe'],
             ['History', 'clock-history'],
             ['Language', 'translate'],
-            ['Psychology', 'brain'],
+            ['Psychology', 'heart'],
             ['Engineering', 'gear']
         ];
 
