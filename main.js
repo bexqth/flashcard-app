@@ -11,20 +11,26 @@ require('electron-reload')([
 });
 
 const databaseHelper = require('./src/main/database/database_helper');
+const IconService = require('./src/main/services/icon_service');
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
     height: 600,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
+      contextIsolation: true,
     },
   });
 
   win.loadFile('src/renderer/views/window/index.html');
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  new IconService(databaseHelper);
+  createWindow();
+});
 
 app.on('before-quit', () => {
     databaseHelper.close();

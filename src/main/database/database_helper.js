@@ -9,7 +9,6 @@ class DatabaseHelper {
 
     initDatabase() {
         const dbPath = path.join(__dirname, 'flashcards.db');
-        
         this.db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
                 console.error('Error opening database:', err);
@@ -22,47 +21,71 @@ class DatabaseHelper {
 
     createTables() {
         this.db.serialize(() => {
-            this.db.run(`CREATE TABLE IF NOT EXISTS decks (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        icon_id INTEGER DEFAULT 1,
-                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                        FOREIGN KEY (icon_id) REFERENCES icons (id)
-                    )`);
-
-            this.db.run(`
-                CREATE TABLE IF NOT EXISTS cards (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    deck_id INTEGER NOT NULL,
-                    front TEXT NOT NULL,
-                    back TEXT NOT NULL,
-                    FOREIGN KEY (deck_id) REFERENCES decks (id)
-                )
-            `);
-
             this.db.run(`CREATE TABLE IF NOT EXISTS icons (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                bootstrap_class TEXT NOT NULL
+                bootstrap_class TEXT NOT NULL,
+                UNIQUE(name, bootstrap_class)
             )`);
 
+            this.db.run(`CREATE TABLE IF NOT EXISTS decks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                icon_id INTEGER DEFAULT 1,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (icon_id) REFERENCES icons (id)
+            )`);
+
+            this.db.run(`CREATE TABLE IF NOT EXISTS cards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                deck_id INTEGER NOT NULL,
+                front TEXT NOT NULL,
+                back TEXT NOT NULL,
+                FOREIGN KEY (deck_id) REFERENCES decks (id)
+            )`, () => {
+                this.checkAndInsertIcons(); // Only call after all tables exist
+            });
         });
-        this.insertIcons();
+    }
+
+    checkAndInsertIcons() {
+        this.db.get("SELECT COUNT(*) as count FROM icons", (err, row) => {
+            if (err) {
+                console.error('Failed to check icons table:', err);
+                return;
+            }
+
+            if (row.count === 0) {
+                this.insertIcons();
+            } else {
+                console.log('Icons already inserted — skipping insert.');
+            }
+        });
     }
 
     insertIcons() {
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Chemistry', 'flask')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Math', 'calculator')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Book', 'book')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Pencil', 'pencil')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Graduation', 'mortarboard')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Biology', 'tree')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Physics', 'lightning')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Geography', 'globe')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('History', 'clock-history')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Language', 'translate')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Psychology', 'brain')");
-        this.db.run("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES ('Engineering', 'gear')");
+        const icons = [
+            ['Chemistry', 'flask'],
+            ['Math', 'calculator'],
+            ['Book', 'book'],
+            ['Pencil', 'pencil'],
+            ['Graduation', 'mortarboard'],
+            ['Biology', 'tree'],
+            ['Physics', 'lightning'],
+            ['Geography', 'globe'],
+            ['History', 'clock-history'],
+            ['Language', 'translate'],
+            ['Psychology', 'brain'],
+            ['Engineering', 'gear']
+        ];
+
+        const stmt = this.db.prepare("INSERT OR IGNORE INTO icons (name, bootstrap_class) VALUES (?, ?)");
+        icons.forEach(([name, cls]) => {
+            stmt.run(name, cls);
+        });
+        stmt.finalize(() => {
+            console.log('Initial icons inserted.');
+        });
     }
 
     getDatabase() {

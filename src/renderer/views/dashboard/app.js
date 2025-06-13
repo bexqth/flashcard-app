@@ -1,9 +1,10 @@
+
 var modal = document.getElementById("myModal");
-var span = document.getElementsByClassName("close")[0];
 
 function openModal() {
-    console.log("open modal");
+console.log("open modal");
   modal.style.display = "block";
+  loadIcons();
 }
 
 function closeModal() {
@@ -14,4 +15,23 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+function selectIcon() {
+
+}   
+
+function selectColor() {
+
+}
+
+async function loadIcons() {
+  //window.api.getAllIcons(); //calls ipcRenderer.invoke('icon:getAll')
+  window.api.getAllIcons().then(data => { //method returns data -> which is the defined promise
+    console.log("Icons:", data);
+  });
+}
+
+function displayIcons(icons) {
+    
 }
