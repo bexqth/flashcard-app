@@ -4,7 +4,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('api', {
   getAllIcons: () => ipcRenderer.invoke('icon:getAll'),
   getAllColors: () => ipcRenderer.invoke('color:getAll'),
-  senCreateDeck: () => ipcRenderer.send('deck:create'),
+  createDeck: (deckName, iconId, colorId) => ipcRenderer.invoke('deck:create', deckName, iconId, colorId)
 });
 
 

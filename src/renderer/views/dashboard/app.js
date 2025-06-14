@@ -1,5 +1,7 @@
 
 var modal = document.getElementById("myModal");
+var idColor = 0;
+var idIcon = 0;
 
 function openModal() {
 console.log("open modal");
@@ -52,8 +54,10 @@ function displayIcons(data) {
         container.querySelectorAll('.icon-item.selected').forEach(icon => {
           icon.classList.remove('selected');
         });
-
+        
+        idIcon = icon.id;
         iconItem.classList.add('selected');
+        console.log("icon id - ", idIcon);
       }
     )
   });
@@ -75,10 +79,29 @@ function displayColors(data) {
           colorItem.classList.remove('selected');
       });
 
+      idColor = color.id;
       colorItem.classList.add('selected');
+      console.log("color id - ", idColor);
       }
     )
   });
+}
+
+async function createDeck() {
+    const deckName = document.getElementById('deck-name').value;
+    const selectedIdIcon = idIcon;
+    const selectedIdColor = idColor;
+
+    try {
+      const result = await window.api.createDeck(deckName, selectedIdIcon, selectedIdColor);
+      if (result.success) {
+          alert("Deck created, id: " + result.id);
+      } else {
+          alert("Something went wrong: " + result.error);
+      }
+    } catch (e) {
+      alert("Unexpected error: " + e.message);
+    }
 }
 
 

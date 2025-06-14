@@ -32,8 +32,10 @@ class DatabaseHelper {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 icon_id INTEGER DEFAULT 1,
+                color_id INTEGER DEFAULT 1,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (icon_id) REFERENCES icons (id)
+                FOREIGN KEY (icon_id) REFERENCES icons(id),
+                FOREIGN KEY (color_id) REFERENCES deck_colors(id)
             )`);
 
             this.db.run(`CREATE TABLE IF NOT EXISTS cards (
